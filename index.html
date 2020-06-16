@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ToDoリスト</h1>
+    <div style="display: inline-block;">
+        <input id="radio_all" type="radio"><span>すべて</span>
+    </div>
+    <div style="display: inline-block;">
+        <input id="radio_work" type="radio"><span>作業中</span>
+    </div>
+    <div style="display: inline-block;">
+        <input id="radio_complete" type="radio"><span>完了</span>
+    </div>
+    <!-- 見た目だけ追加 -->
+    <div>
+        <table>
+            <tbody id="listarea">
+                <tr>
+                    <th>ID</th>
+                    <th>コメント</th>
+                    <th>状態</th>
+                    <th></th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <h2>新規タスクの追加</h2>
+    <div>
+        <div>
+            <input id="task" type="text" style="width: 190px;">
+            <button id="addbtn">追加</button>
+        </div>
+    </div>
+    <script src="kadai.js"></script>
+</body>
+</html>
