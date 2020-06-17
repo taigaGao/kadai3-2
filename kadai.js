@@ -15,17 +15,30 @@ window.onload = function () {
     }
     // 「作業中」ボタンの追加
     const addWorkBtn = () => {
-        const makeTd = document.createElement('td');
-        const makeBtn = document.createElement('button');
-        listArea.lastElementChild.appendChild(makeTd).appendChild(makeBtn);
+        const td = document.createElement('td');
+        const button = document.createElement('button');
+        listArea.lastElementChild.appendChild(td).appendChild(button);
         listArea.lastElementChild.lastElementChild.lastElementChild.textContent = '作業中';
     };
     // 「削除」ボタンの追加
     const addRemoveBtn = () => {
-        const makeTd = document.createElement('td');
-        const makeBtn = document.createElement('button');
-        listArea.lastElementChild.appendChild(makeTd).appendChild(makeBtn);
+        const td = document.createElement('td');
+        const button = document.createElement('button');
+        listArea.lastElementChild.appendChild(td).appendChild(button);
         listArea.lastElementChild.lastElementChild.lastElementChild.textContent = '削除';
+        button.addEventListener('click', function() {
+            // クリックイベントが発生した要素のID(=対象オブジェクトのid)を取得
+            var num = this.parentElement.parentElement.firstElementChild.textContent;
+            // 配列から対象の要素を削除して積める
+            taskList.splice( num, 1 );
+            // 各タスクのidの降り直し
+            for (let i = 0; i < taskList.length; i++) {
+                taskList[i].id = i;
+            };
+            // htmlへの再出力
+            putBtn();
+        });
+        return button;
     };
     // 追加ボタンが押下された時の処理
     const putBtn = () => {
@@ -38,17 +51,13 @@ window.onload = function () {
         taskList.forEach(value => {
             const tr = document.createElement('tr');
             listArea.appendChild(tr);
-            const tdId = document.createElement('td');
-            listArea.lastElementChild.appendChild(tdId).textContent = value.id;
+            const td = document.createElement('td');
+            listArea.lastElementChild.appendChild(td).textContent = value.id;
             const tdTask = document.createElement('td');
             listArea.lastElementChild.appendChild(tdTask);
             listArea.lastElementChild.lastElementChild.textContent = value.comment;
             addWorkBtn();
             addRemoveBtn();
-            // 削除ボタンにtaskIDと同一のIDを付与
-            listArea.lastElementChild.lastElementChild.lastElementChild.id = value.id;
-            // 削除ボタンに対するaddEventListenerの生成
-            document.getElementById(value.id).addEventListener('click', dellEvent);
         });
     };
     // 追加ボタンが押下された時の処理
@@ -60,18 +69,4 @@ window.onload = function () {
         putBtn();
     }
     document.getElementById("addbtn").addEventListener('click', addEvent);
-    // document.getElementById('listarea').childNodes.lastElementChild.childNodes
-    // 削除ボタンが押下された時の処理
-    const dellEvent = (e) => {
-        // クリックイベントが発生した要素のID(=対象オブジェクトのid)を取得
-        var num = e.target.id;
-        // 配列から対象の要素を削除して積める
-        taskList.splice( num, 1 );
-        // 各タスクのidの降り直し
-        for (let i = 0; i < taskList.length; i++) {
-            taskList[i].id = i;
-        }
-        // htmlへの再出力
-        putBtn();
-    }
 }
