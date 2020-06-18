@@ -26,6 +26,10 @@ window.onload = function () {
         const button = document.createElement('button');
         listArea.lastElementChild.appendChild(td).appendChild(button);
         listArea.lastElementChild.lastElementChild.lastElementChild.textContent = '削除';
+        return button;
+    };
+    // 「削除」ボタン押下時のイベントの追加
+    const addRemoveEvent = (button) => {
         button.addEventListener('click', function() {
             // クリックイベントが発生した要素のID(=対象オブジェクトのid)を取得
             var num = this.parentElement.parentElement.firstElementChild.textContent;
@@ -38,8 +42,7 @@ window.onload = function () {
             // htmlへの再出力
             putBtn();
         });
-        return button;
-    };
+    }
     // 追加ボタンが押下された時の処理
     const putBtn = () => {
         // タスクリストのタイトル部分以外を削除
@@ -57,7 +60,8 @@ window.onload = function () {
             listArea.lastElementChild.appendChild(tdTask);
             listArea.lastElementChild.lastElementChild.textContent = value.comment;
             addWorkBtn();
-            addRemoveBtn();
+            let button = addRemoveBtn();
+            addRemoveEvent(button);
         });
     };
     // 追加ボタンが押下された時の処理
