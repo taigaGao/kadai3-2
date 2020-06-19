@@ -12,7 +12,7 @@ window.onload = function () {
             state: 0
         };
         taskList.push(task);
-    }
+    };
     // 「作業中」ボタンの追加
     const addWorkBtn = () => {
         const td = document.createElement('td');
@@ -32,7 +32,7 @@ window.onload = function () {
     const addRemoveEvent = (button) => {
         button.addEventListener('click', function() {
             // クリックイベントが発生した要素のID(=対象オブジェクトのid)を取得
-            var num = this.parentElement.parentElement.firstElementChild.textContent;
+            const num = this.parentElement.parentElement.firstElementChild.textContent;
             // 配列から対象の要素を削除して積める
             taskList.splice( num, 1 );
             // 各タスクのidの降り直し
@@ -42,13 +42,11 @@ window.onload = function () {
             // htmlへの再出力
             putBtn();
         });
-    }
+    };
     // 追加ボタンが押下された時の処理
     const putBtn = () => {
         // タスクリストのタイトル部分以外を削除
-        while (listArea.childNodes[2]) {
-            listArea.removeChild(listArea.childNodes[2]);
-        };
+        listArea.innerHTML = '';
         // フォームの内容をからにする
         document.getElementById('task').value = '';
         taskList.forEach(value => {
@@ -71,6 +69,6 @@ window.onload = function () {
         // タスクの内容(taskValue)をタスクの追加関数(addTask)に渡す
         addTask(taskValue);
         putBtn();
-    }
-    document.getElementById("addbtn").addEventListener('click', addEvent);
+    };
+    document.getElementById('addbtn').addEventListener('click', addEvent);
 }
